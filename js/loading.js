@@ -6,15 +6,16 @@
 
             if ($.isPlainObject(options) || 'open' === options || undefined === options) {
 
-                options = $.extend({}, options);
+                options = $.extend($.fn.loading.defaults, options);
 
                 var container = $(this);
-                
+
                 var div = $('#k2-loading');
 
                 if (!div.size()) {
-                    var div = $('<div id="k2-loading"><div></div><div></div></div>');
+                    var div = $('<div id="k2-loading"><div class="k2-loading-first"></div><div class="k2-loading-last"></div></div>');
                     $("body").append(div);
+                    div.find('.k2-loading-last').css('background-image', 'url(' + options.img + ')');
                 }
 
                 if (this !== window.document) {
@@ -43,6 +44,8 @@
         $(document).loading(options)
     };
 
+    $.fn.loading.defaults = {
+        img: '../images/loading.gif',
+    };
+
 })(jQuery);
-
-
